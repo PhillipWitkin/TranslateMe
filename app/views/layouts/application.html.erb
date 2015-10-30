@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TranslateMeApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class="ui inverted menu">
+  <div class="item"></div> 
+  <div class="item"></div> 
+  <a href="/" class="item">
+    <i class="fa fa-home fa-lg"></i> Home
+  </a>
+<!--   <a class="item">
+    <i class="mail icon"></i> Messages
+  </a>
+  <a class="item">
+    <i class="user icon"></i> Friends
+  </a> -->
+
+  <div class="right menu">
+  <% if @current_user %>
+    <form action="/login" method="POST">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name="_method" type="hidden" value="delete" />
+      <input type="submit" class="ui button item" value="Log Out">
+    </form>
+    <% else %>
+      <a href="/login/new" class="ui item">
+        Login
+      </a>
+    <% end %>
+  </div>
+</div>
+
+<%= yield %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+</body>
+</html>

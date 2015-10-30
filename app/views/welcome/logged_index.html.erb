@@ -1,0 +1,189 @@
+<div id="banner">
+  <h2 class="ui center aligned icon header">
+    <i class="circular fa fa-globe fa-5x"></i><br />
+    <p class="title">TranslateMe</p>
+  </h2>
+  <h3 class="ui center aligned header" data-user=<%= @current_user.username %> id="current_user">Welcome, <%= @current_user.username %>! You're looking quite sharp today.</h3>
+</div>
+<div id="table-option">
+  <div id= "option" class="ui menu fluid three item">
+    <a href="#recents" class="item">
+      <i class="fa fa-history fa-lg"></i>Recents
+    </a>
+    <a href="#translations" class="item">
+      <i class="fa fa-calendar-o fa-lg"></i>My Cards
+    </a>
+    <a href="#categories" class="item">
+      <i class="fa fa-tags fa-lg"></i>Categories
+    </a>
+  </div>
+</div>
+<div id="card_table">
+  <table class="ui table segment two column">
+    <thead>
+        <tr data-id="table-header">
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="3">
+          <div class="ui green button" data-action="new-card-form"><i class="fa fa-plus fa-lg">
+            </i>Add Card
+          </div>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+  
+        <script type="text/template" data-template="card-template">
+          <td>{{english_phrase}}</td>
+          <td><a href="#/cards/{{id}}">{{explanation}}</a></td>
+          <td>{{updated_at}}</td>
+        </script>
+
+<script type="text/template" data-template="new-card-form">
+  <div class="header">
+    New Card Form
+  </div>
+  <div class="content">
+    <form class="ui form">
+      <h4 class="ui dividing header">Card Template</h4>
+      <div class="ui required field">
+        <label>English Phrase</label>
+        <input type="text" name="english_phrase">
+      </div>
+      <div class="ui required field">
+        <label>Explanation</label>
+        <input type="text" name="explanation"> 
+      </div>
+      <div class="ui field">
+        <label>Categories</label>
+        <input type="text" name="categories"> 
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled button">
+      Add Card
+    </div>
+  </div>
+</script>
+
+<script type="text/template" data-template="new-card-error">
+  <div class="ui error message">
+    <p>You tried to create a card with a phrase that already exists!</p>
+  </div>
+</script>
+
+<script type="text/template" data-template="card-show-template">
+    <div class="header">
+    <a class="star"><i class="fa fa-star fa-lg" data-id="add-favorite"></i></a>
+    {{english_phrase}}
+    <a class="close"><i class="fa fa-times fa-1x"></i></a>
+    </div>
+      <div class="content">
+        <div class="ui segment">
+          <div class="description">  
+            <h1 class="ui header centered">{{english_phrase}}</h1>
+            <h2 class="ui header centered">{{explanation}}</h2>
+            <p><i class="fa fa-tags fa-lg"></i>Categories:</p>
+            <p>  
+            {{#categories}}
+              {{category_name}}, 
+            {{/categories}}
+            </p>
+            <h4 class="ui horizontal header divider">
+              <i class="fa fa-comments-o fa-2x"></i>  
+              Translations
+            </h4>
+
+            <div id="padded-content" class="ui padded grid four wide column" data-id="translation-list">
+
+            </div>
+         
+          </div>
+            <div class="ui segment">
+              <form class="ui form" action="/api/cards/{{id}}" method="POST">
+                <h1 class="ui dividing header"><i class="fa fa-language fa-lg"></i>Add A Translation</h1>
+                <div class="two fields">
+                  <div class="three wide field">
+                    <label>Language</label>
+                    <select class="ui dropdown" name="language">
+                      <option value="Korean">Korean</option>
+                      <option value="Russian">Russian</option>
+                      <option value="Arabic">Arabic</option>
+                      <option value="Spanish">Spanish</option>
+                      <option value="Chinese">Chinese</option>
+                      <option value="Croatian">Croatian</option>
+                    </select>
+                  </div>
+                  <div class="thirteen wide field">
+                    <label>Translation</label>
+                    <input type="text" name="translation">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Phonetic</label>
+                  <input type="text" name="phonetic">
+                </div>
+                <div class="field">
+                  <label>Meaning</label>
+                  <input type="text" name="meaning">
+                </div>
+                <input type="hidden" name="user_id" value="<%= @current_user.id %>">
+                <input type="hidden" name="card_id" value="{{id}}">
+                <input type="hidden" name="_method" value="put">
+                <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+                <button data-id="add-translation" class="ui positive labeled button">
+                  Translate
+                </button>
+              </form>
+            </div>
+        </div>
+      </div>
+</script>
+
+<script type="text/template" data-template="translation-template">
+  <div id="padded-content" class="ui padded grid four wide column">
+
+    <div class="four column row">
+      <h4>Language: {{language}}</h4>
+    </div>
+    <div class="four column centered row">
+      <h2>Translation: {{translation}}</h2>
+    </div>
+    <div class="four column centered row">
+      <div class="one column">
+        <p>Phonetic: {{phonetic}}</p>
+      </div>
+      <div class="one column">
+        <p>Meaning: {{meaning}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="one right aligned column">
+        <p><i class="fa fa-user fa-lg"></i>
+          {{#user}}
+            {{username}}
+          {{/user}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+</script>
+
+<script type="text/template" data-template="category-template">
+  <td><a href="#categories/{{id}}">{{category_name}}</a></td>
+</script> 
+
+
+
+

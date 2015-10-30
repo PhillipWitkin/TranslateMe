@@ -1,0 +1,53 @@
+<% if @current_user %>
+  <h3>Welcome <%= @current_user.username %>! </h3>
+<% end %>
+
+<div id="login"> 
+  <div class="ui two column middle aligned relaxed fitted stackable grid">
+    <div class="column">
+      <% if @message %>
+        <p><%= @message %></p>
+      <% end %>
+  
+        <form action="/login" method="post" class="ui form segment">
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <div class="field">
+            <label>Username</label>
+            <div class="ui left icon input">
+              <i class="fa fa-user fa-2x"></i>
+              <input type="text" placeholder="Username" name="username">
+              
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="ui left icon input">
+              <i class="fa fa-lock fa-2x"></i>
+              <input type="password" name="password">
+              
+            </div>
+          </div>
+          <button class="ui blue submit button">Login</button>
+        </form>
+
+
+    </div>
+      <div class="ui vertical divider">
+        Or
+      </div>
+    <div class="center aligned column">
+      <a href="/users/new">
+      <div class="huge green ui button">
+          <i class="fa fa-pencil-square-o"></i>Sign up
+      </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
