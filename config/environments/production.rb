@@ -1,4 +1,6 @@
 Rails.application.configure do
+  
+  config.assets.compile = true
   # Settings specified here will take precedence over those in config/application.rb.
   config.assets.initialize_on_precompile = false
   # Code is not reloaded between requests.
