@@ -19,7 +19,7 @@ Meowth.Views.CardShow = Backbone.View.extend({
         var favIds = _.pluck(data, 'card_id');
         var card_id = self.model.get('id')
         if (_.contains(favIds, card_id)){
-          $('.star').css("color", "papayawhip")
+          $('.star').css("color", "gold")
         } else {
           $('.star').css("color", "grey")
         }
@@ -90,7 +90,7 @@ Meowth.Views.CardShow = Backbone.View.extend({
           method: "DELETE",
           url: "api/users/favorites/" + fave_id
         }).done(function(data){
-          $('.star').css("color", "grey")
+          $('.star').css("color", "gold")
         })
       } else {
         $.ajax({
@@ -98,7 +98,7 @@ Meowth.Views.CardShow = Backbone.View.extend({
           url: "api/users/favorites",
           data: {"card_id": card_id}
         }).done(function(data){
-          $('.star').css("color", "papayawhip")
+          $('.star').css("color", "yellow")
         })
       }
     })
