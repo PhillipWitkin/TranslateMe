@@ -23,3 +23,4 @@
 
 //= require_tree ./backbone/models/
 //= require_tree ./backbone/collections/
+//= require_tree ./backbone/views/
