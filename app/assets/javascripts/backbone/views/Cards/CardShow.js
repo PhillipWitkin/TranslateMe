@@ -88,7 +88,7 @@ Meowth.Views.CardShow = Backbone.View.extend({
 
         $.ajax({
           method: "DELETE",
-          url: "api/users/favorites/" + fave_id,
+          url: "api/users/favorites/" + fave_id
         }).done(function(data){
           $('.star').css("color", "grey")
         })
