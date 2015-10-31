@@ -1,10 +1,11 @@
 var Meowth = Meowth || { Models: {}, Collections: {}, Views: {}, Routers: {} };
 
 Meowth.Views.TranslationCollectionView = Backbone.View.extend({
-  initialize: function () {
+  initialize: function(){
     this.listenTo(this.collection, 'add', this.render)
   },
-  render: function(model) {
+
+  render: function(model){
     var newTranslationView = new Meowth.Views.TranslationView({
       model: model
     })

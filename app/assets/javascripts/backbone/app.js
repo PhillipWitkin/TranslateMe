@@ -24,6 +24,6 @@ Meowth.initialize = function(){
 }
 
 
-$(function(){
+var init = (function(){
   Meowth.initialize();
-})
+})()
