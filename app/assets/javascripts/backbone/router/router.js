@@ -1,7 +1,7 @@
 var Meowth = Meowth || { Models: {}, Collections: {}, Views: {}, Routers: {} };
 
 Meowth.Routers.AppRouter = Backbone.Router.extend({
-  routes :{
+  routes: {
     '': 'index',
     'cards/:id': 'cardShow',
     'categories' : 'viewCategories',
