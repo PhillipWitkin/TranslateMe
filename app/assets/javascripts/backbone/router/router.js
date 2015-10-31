@@ -56,7 +56,7 @@ Meowth.Routers.AppRouter = Backbone.Router.extend({
     var cards = category.get("cards")
     var categoryCardCollection = new Meowth.Collections.CardsByCategory();
     _.each(cards, function(card) {
-      var c = new Meowth.Models.Card({card})
+      var c = new Meowth.Models.Card(card)
       for (var k in card){
         c.set(k, card[k])        
       }
