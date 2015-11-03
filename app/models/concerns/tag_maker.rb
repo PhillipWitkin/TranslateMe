@@ -15,23 +15,24 @@ class TagMaker
   end
 
   def generate_tags(card)
+    #create tags for each existing category
     @categories[0].each do |cat|
-    new_tag = Tag.new(card_id: card.id, category_id: cat.id)
-    new_tag.save
+      new_tag = Tag.new(card_id: card.id, category_id: cat.id)
+      new_tag.save
     # new_tag.valid?
-    puts "new tag #{new_tag.card_id} has errors: #{new_tag.errors.full_messages}"
+      puts "new tag #{new_tag.card_id} has errors: #{new_tag.errors.full_messages}"
     end
 
       # create new categories, then tags for them
     @categories[1].each do |cat|
-    new_category = Category.new(category_name: cat)
-    new_category.save
+      new_category = Category.new(category_name: cat)
+      new_category.save
     
-    new_tag = Tag.new(card_id: card.id, category_id: new_category.id)
+      new_tag = Tag.new(card_id: card.id, category_id: new_category.id)
 
-    new_tag.save
+      new_tag.save
     # new_tag.valid?
-    puts "new category #{new_category.category_name}, new tag with card number #{new_tag.card_id} has errors #{new_tag.errors.full_messages}"   
+      puts "new category #{new_category.category_name}, new tag with card number #{new_tag.card_id} has errors #{new_tag.errors.full_messages}"   
     end
 
   end
